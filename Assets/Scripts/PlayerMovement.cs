@@ -95,15 +95,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown("Courch"))
-        {
-            crouch = true;
-        }
-        else if(Input.GetKeyUp("Courch"))
-        {
-            crouch = false;
-        }
-
         if (rb.linearVelocity.y < 0)
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
@@ -111,11 +102,6 @@ public class PlayerMovement : MonoBehaviour
         else if (rb.linearVelocity.y > 0 && !Input.GetKey(KeyCode.Space))
         {
             rb.linearVelocity += Vector2.up * Physics2D.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
-        }
-
-        if (isGrounded)
-        {
-            standingCollider.enabled = !crouch;
         }
 
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
