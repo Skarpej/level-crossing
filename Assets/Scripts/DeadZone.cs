@@ -2,17 +2,18 @@ using UnityEngine;
 
 public class DeadZone : MonoBehaviour
 {
-    public Transform playerStartPosition;  // The position where the player should reset to.
+    public Transform playerStartPosition;  // The respawn point
+    public Transform cameraStartPosition; // The initial camera position (optional)
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player")) // Assuming you tagged your player object with "Player"
+        if (other.CompareTag("Player")) // Make sure player has the "Player" tag
         {
-            // Reset player position to the starting point
+            // Reset player position
             other.transform.position = playerStartPosition.position;
 
-            // Optionally, reset other aspects like health, score, etc.
-            // other.GetComponent<PlayerHealth>().ResetHealth();
+            // Reset camera position (if using a simple camera follow script)
+            Camera.main.transform.position = cameraStartPosition.position;
         }
     }
 }
