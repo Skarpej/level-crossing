@@ -3,21 +3,31 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 10f;
-    private int direction = 1; // Default to moving right
+    private int direction = 1;
+    private Rigidbody2D rb;
 
-    void Update()
+    void Start()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime * direction);
+        rb = GetComponent<Rigidbody2D>();
+        rb.linearVelocity = new Vector2(speed * direction, 0);
     }
 
     public void SetDirection(int newDirection)
     {
         direction = newDirection;
-        transform.localScale = new Vector3(direction, 1, 1); // Flip bullet if needed
+        rb.linearVelocity = new Vector2(speed * direction, 0);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Ground")) // Bullet disappears on wall hit
+        {
+            Destroy(gameObject);
+        }
     }
 
     void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        Destroy(gameObject); // Destroy if it goes off-screen
     }
 }

@@ -404,13 +404,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 237261176}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0063704154, y: 0, z: 0, w: 0.99997973}
-  m_LocalPosition: {x: 0.072, y: -0.083, z: 0}
+  m_LocalRotation: {x: 0.004634954, y: -0.0043703085, z: -0.6860156, w: 0.7275589}
+  m_LocalPosition: {x: -0.045000076, y: -0.148, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 547337768}
-  m_LocalEulerAnglesHint: {x: 0.73, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0.043, y: -0.729, z: -86.634}
 --- !u!1 &289905740
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1240,7 @@ MonoBehaviour:
   crouchSpeedmodifier: 0.5
   maxJumps: 2
   doubleJumpEffect: {fileID: 7376797760630546044, guid: 0bffdd0961c684fdfad18b97d7db4d47, type: 3}
+  facingRight: 1
   isRunning: 0
   wallCheck: {fileID: 1792762405}
   wallLayer:
@@ -7261,7 +7262,7 @@ GameObject:
   - component: {fileID: 754949797}
   m_Layer: 3
   m_Name: Tilemap
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
