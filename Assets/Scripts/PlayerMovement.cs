@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     public int maxJumps = 2;
     private int jumpCount;
     public GameObject doubleJumpEffect;
-    private bool facingRight = true;
+    public bool facingRight = true;
     public bool isRunning = false;
     private float moveInput;
 
