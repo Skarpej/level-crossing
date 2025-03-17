@@ -4,27 +4,26 @@ public class PlayerShooting : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float fireRate = 0.2f;
-    private float nextFireTime = 0f;
+    public float fireRate = 0.2f; // Time between shots
+    private float nextFireTime = 0f; // When the next shot is allowed
 
     void Update()
     {
-        if (Input.GetButton("Shoot") && Time.time >= nextFireTime)
+        // Only shoot if enough time has passed
+        if (Input.GetButtonDown("Shoot") && Time.time >= nextFireTime)
         {
             Shoot();
-            nextFireTime = Time.time + fireRate;
+            nextFireTime = Time.time + fireRate; // Set next allowed fire time
         }
     }
 
-void Shoot()
-{
-    GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
 
-    // Check PlayerMovement's facingRight variable
-    bool isFacingRight = GetComponent<PlayerMovement>().facingRight;
+        // Get the player's direction to determine bullet's direction
+        int direction = GetComponent<PlayerMovement>().facingRight ? 1 : -1;
 
-    // Set bullet direction
-    bullet.GetComponent<Bullet>().SetDirection(isFacingRight ? 1 : -1);
-}
-
+        bullet.GetComponent<Bullet>().SetDirection(direction); // Set bullet's direction
+    }
 }
