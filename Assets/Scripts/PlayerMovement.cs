@@ -7,32 +7,18 @@ public class PlayerMovement : MonoBehaviour
     private Animator animator;
     private bool isGrounded;
     public float moveSpeed = 5f;
-    public float runningSpeedModifier = 1.5f;
     public float jumpForce = 10f;
     public LayerMask groundLayer;
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
 
-     public float fallMultiplier = 2.5f;
+    public float fallMultiplier = 2.5f;
     public float lowJumpMultiplier = 2f;
-    public float crouchSpeedmodifier = 0.5f;
     public int maxJumps = 2;
     private int jumpCount;
     public GameObject doubleJumpEffect;
     public bool facingRight = true;
-    public bool isRunning = false;
     private float moveInput;
-
-    public Transform wallCheck;
-    public LayerMask wallLayer;
-    private bool isTouchingWall;
-
-    private bool crouch = false;
-    
-    public float wallJumpHorizontalForce = 8f;  // Stronger push-off
-    public float wallJumpVerticalForce = 13f;    // Higher launch
-    private bool wallJumping;
-    public float wallJumpDuration = 0.3f;        // Slightly longer control lock
 
     private void Start()
     {
@@ -43,26 +29,10 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            isRunning = true;
-        }
-
-        if (Input.GetKeyUp(KeyCode.LeftShift))
-        {
-            isRunning = false;
-        }
-
         moveInput = Input.GetAxis("Horizontal");
-        float currentSpeed = isRunning ? moveSpeed * runningSpeedModifier : moveSpeed;
-        
-        if (!wallJumping)
-        {
-            rb.linearVelocity = new Vector2(moveInput * currentSpeed, rb.linearVelocity.y);
-        }
+        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
         
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        isTouchingWall = Physics2D.OverlapCircle(wallCheck.position, groundCheckRadius, wallLayer);
 
         if (moveInput > 0 && !facingRight)
         {
@@ -89,10 +59,6 @@ public class PlayerMovement : MonoBehaviour
                 }
                 jumpCount--;
             }
-            else if (isTouchingWall && !isGrounded)
-            {
-                PerformWallJump();
-            }
         }
 
         if (rb.linearVelocity.y < 0)
@@ -105,28 +71,6 @@ public class PlayerMovement : MonoBehaviour
         }
 
         animator.SetFloat("xVelocity", Mathf.Abs(rb.linearVelocity.x));
-    }
-
-    private void PerformWallJump()
-    {
-        wallJumping = true;
-
-        // Determine the direction to push the player away from the wall
-        float pushDirection = facingRight ? -1 : 1;
-
-        // Apply force in a diagonal direction away from the wall
-        rb.linearVelocity = new Vector2(pushDirection * wallJumpHorizontalForce, wallJumpVerticalForce);
-
-        // Flip the character's direction
-        Flip();
-
-        // Lock movement for a short duration to avoid sticking
-        Invoke(nameof(StopWallJump), wallJumpDuration);
-    }
-
-    private void StopWallJump()
-    {
-        wallJumping = false;
     }
 
     private void Flip()
