@@ -39,20 +39,35 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Background
-    uniqueID: 213310039
-    locked: 0
-  - name: Backtile
-    uniqueID: 3075074749
-    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Game
+  - name: Fog_Back_2
+    uniqueID: 321590721
+    locked: 0
+  - name: Back_2
+    uniqueID: 628860465
+    locked: 0
+  - name: Fog_Back_1
+    uniqueID: 3246564077
+    locked: 0
+  - name: Back_1
+    uniqueID: 213310039
+    locked: 0
+  - name: Ground
     uniqueID: 1563084051
     locked: 0
-  - name: Fronttile
-    uniqueID: 3986379643
+  - name: Player
+    uniqueID: 390998359
+    locked: 0
+  - name: Front_1
+    uniqueID: 3075074749
+    locked: 0
+  - name: Fog_Front_1
+    uniqueID: 1743353735
+    locked: 0
+  - name: Front_2
+    uniqueID: 3143088175
     locked: 0
   m_RenderingLayers:
   - Default
